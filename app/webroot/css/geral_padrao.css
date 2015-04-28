@@ -1,0 +1,434 @@
+body{
+    color:#666666;
+    font-family: "Open Sans", Helvetica, sans-serif, arial;
+    font-size: 1em;
+    font-weight: 300;
+    margin: 0 auto; /*centralizando o conteúdo no navegador*/
+    max-width: 1200px;
+}
+
+#container{
+    position: relative;
+}
+
+#header{
+    width: 100%;
+    border-bottom: 1px solid darkblue;
+    height: 1.5em;
+}
+
+#header h1{
+    width: 9em;
+    float: left;
+    margin: 0px;
+}
+
+#header ul{
+    margin: 0em;
+    float: right;
+}
+
+#header li{
+    font-size: 0.9em;
+    list-style: none;
+    display: inline;
+    margin: 0em 1em;
+}
+
+#footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}
+
+#footer img{
+    float: right;
+    margin: 1em;
+    background-color: #ffffff;
+}
+
+/*.clearfix usado para adicionar um espaço vazio antes e depois dos elementos
+  evitando que os floats se aglomerem.
+*/
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+/*fim do clearfix*/
+
+img, picture, video, embed {
+    max-width: 100%; /*define a largura máxima em até 100%*/
+}
+
+h1 {
+    font-size: 1em;
+}
+
+a, a:hover, a:visited {
+    text-decoration: none;
+    color:#666666;
+}
+
+#lancamentoTop{
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+#lancamentoDetalhe {
+    width: 55%;
+    float: left;
+    font-size: 0.8em;
+    padding: 5px;
+}
+
+#lancamentoDetalhe button {
+
+}
+
+/* botões de despesa, receita e transferencia*/
+
+#tipoLancamento {
+    width: auto;
+    float: right;
+    font-size: 0.8em;
+    margin: 5px;
+    font-family: "Open Sans", Helvetica, sans-serif, arial;
+
+}
+
+#tipoLancamento input{
+    height: 1px;
+    width: 1px;
+    padding: 0px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.tipoLancamento {
+    filter: alpha(opacity=15); /* support: IE8 */
+    opacity: 0.15;
+}
+
+.tipoLancamentoSelecionado {
+    filter: alpha(opacity=100); /* support: IE8 */
+    opacity: 1;
+}
+
+#tipoLancamento label{
+    border: 0px solid #aaaaaa;
+    font-size: 1.1em;
+    border-radius: 4px;
+    display: inline-block;
+    height: 20px;
+    padding: 4px;
+    width: 6.7em;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+
+}
+
+#lblLancamentoDespesa {
+    background-color: #FF0000;
+    color: #ffffff;
+}
+
+#lblLancamentoReceita {
+    background-color: green;
+    color: #ffffff;
+}
+
+#lblLancamentoTransferencia {
+    background-color: yellow;
+}
+
+#lancamentoReceita {
+    background-color: #E6FAE6;
+    color: #ffffff;
+}
+
+#lancamentoTransferencia {
+    background-color: #FFFFE6;
+    color: #CCCCCC;
+}
+
+#lancamentoDespesa.tileTipoLancamentoSelecionado{
+    background-color: #FF0000;
+    color: #ffffff;
+}
+
+#lancamentoReceita.tileTipoLancamentoSelecionado{
+    background-color: #00CC00;
+    color: #ffffff;
+}
+
+#lancamentoTransferencia.tileTipoLancamentoSelecionado{
+    background-color: #FFFF00;
+    color: #000000;
+}
+
+#formulario {
+    width: 70%;
+    float: left;
+}
+
+#lancamentoCadastro {
+    width: calc(100% - 22em);
+    float: left;
+}
+
+#adicionar .tile {
+    border: 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 7em;
+    height: 4.5em;
+    margin: 0.4em;
+    font-size: 1em;
+    text-align: center;
+    background-color: #bbbbbb;
+    white-space: normal;
+    word-wrap: break-word;
+    vertical-align: middle;
+    color: #000000;
+}
+
+#lancamentoUltimos {
+    width: 20em;
+    float: right;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#lancamentoUltimos h2 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0px;
+}
+
+#lancamentoUltimos table {
+    text-align: left;
+    font-size: 0.8em;
+    width: 100%;
+}
+
+.ultimosLancamentosGrupos {
+    padding-left: 2em;
+}
+
+.ultimosLancamentosValorNegativo {
+    color: red;
+}
+
+#carregandoUltimos {
+    width: 18em;
+    height: 20px;
+    position: absolute;
+    z-index: -1;
+    filter: alpha(opacity=15); /* support: IE8 */
+    opacity: 0.15;
+
+}
+
+.ultimosLancamentosData {
+    background-color: rgba(223, 223, 223, 0.5);
+    font-weight: 400;
+    padding-left: 1em;
+}
+
+/** Forms **/
+
+form {
+    clear: both;
+    margin-right: 20px;
+    padding: 0;
+    width: 95%;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 1em;
+    padding: 16px 10px;
+}
+
+fieldset legend {
+    color: #e32;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+fieldset fieldset {
+    margin-top: 0;
+    padding: 10px 0 0;
+}
+fieldset fieldset legend {
+    font-size: 100%;
+    font-weight: normal;
+}
+fieldset fieldset div {
+    clear: left;
+    margin: 0 20px;
+}
+form div {
+    clear: both;
+    margin-bottom: 0px;
+    padding: .5em;
+    vertical-align: text-top;
+}
+
+form .input {
+    color: #444;
+}
+/*
+form .required {
+    font-weight: bold;
+}
+*/
+form .required label:after {
+    color: #e32;
+    content: '*';
+    display:inline;
+}
+
+form div.submit {
+    border: 0;
+    clear: both;
+    margin-top: 5px;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    margin-bottom:3px;
+}
+
+input, textarea {
+    clear: both;
+    font-size: 1em;
+    padding: 1%;
+    width:98%;
+}
+select {
+    clear: both;
+    font-size: 1em;
+    vertical-align: text-bottom;
+}
+select[multiple=multiple] {
+    width: 100%;
+}
+option {
+    font-size: 100%;
+    padding: 0 3px;
+}
+input[type=checkbox] {
+    clear: left;
+    float: left;
+    margin: 0px 6px 7px 2px;
+    width: auto;
+}
+div.checkbox label {
+    display: inline;
+}
+input[type=radio] {
+    width:auto;
+    margin: 6px 0;
+    padding: 0;
+    line-height: 26px;
+}
+.radio label {
+    margin: 0 0 6px 20px;
+    line-height: 26px;
+}
+input[type=submit] {
+    display: inline;
+    font-size: 1em;
+    width: auto;
+}
+/*
+button {
+    display: inline;
+    font-size: 1em;
+    width: auto;
+    color: darkblue;
+    background-color: #ffffff;
+    border: 1px solid darkblue;
+    border-radius: 4px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #ffffff;
+    background-color: darkblue;
+}*/
+
+form button {
+    display: inline;
+    font-size: 1em;
+    width: auto;
+    color: darkblue;
+    background-color: #ffffff;
+    border: 1px solid darkblue;
+    border-radius: 4px;
+    padding: 15px;
+    cursor: pointer;
+    margin: .5em;
+}
+form button:hover {
+    color: #ffffff;
+    background-color: darkblue;
+    cursor: pointer;
+    margin: .5em;
+}
+
+form .submit input[type=submit] {
+    background:#62af56;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#76BF6B), to(#3B8230));
+    background-image: -webkit-linear-gradient(top, #76BF6B, #3B8230);
+    background-image: -moz-linear-gradient(top, #76BF6B, #3B8230);
+    border-color: #2d6324;
+    color: #fff;
+    text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0px;
+    padding: 8px 10px;
+}
+form .submit input[type=submit]:hover {
+    background: #5BA150;
+}
+/* Form errors */
+/*
+form .error {
+    background: #FFDACC;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    font-weight: normal;
+}
+form .error-message {
+    -moz-border-radius: none;
+    -webkit-border-radius: none;
+    border-radius: none;
+    border: none;
+    background: none;
+    margin: 0;
+    padding-left: 4px;
+    padding-right: 0;
+}
+form .error,
+form .error-message {
+    color: #9E2424;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+*/

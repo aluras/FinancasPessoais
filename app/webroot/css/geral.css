@@ -1,0 +1,298 @@
+body{
+    color:#666666;
+    font-family: "Open Sans", Helvetica, sans-serif, arial;
+    font-size: 1em;
+    font-weight: 300;
+    margin: 0 auto; /*centralizando o conteúdo no navegador*/
+    max-width: 1200px;
+}
+
+img, picture, video, embed {
+    max-width: 100%; /*define a largura máxima em até 100%*/
+}
+
+a, a:hover, a:visited {
+    text-decoration: none;
+    color:#666666;
+}
+
+#header{
+    width: 100%;
+    border-bottom: 1px solid darkblue;
+}
+#header h1{
+    margin: 0px;
+    font-size: 1em;
+}
+#header ul{
+    margin: 0em;
+    font-size: 0.9em;
+    list-style: none;
+    padding: 0px;
+    display: none;
+}
+#header ul li{
+    display: inline;
+}
+
+
+#footer{
+    width: 100%;
+    border-top: 1px solid darkblue;
+}
+#footer img{
+    float: right;
+}
+
+#lancamentoTop{
+    width: 100%;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+#tipoLancamento {
+    width: auto;
+    font-size: 0.8em;
+    margin: 5px;
+    text-align: center;
+}
+#tipoLancamento input{
+    height: 1px;
+    width: 1px;
+    padding: 0px;
+    margin: -1px;
+    overflow: hidden;
+}
+.tipoLancamento {
+    filter: alpha(opacity=15); /* support: IE8 */
+    opacity: 0.15;
+}
+.tipoLancamentoSelecionado {
+    filter: alpha(opacity=100); /* support: IE8 */
+    opacity: 1;
+}
+#tipoLancamento label{
+    border: 0px solid #aaaaaa;
+    font-size: 1.1em;
+    border-radius: 4px;
+    display: inline-block;
+    height: 20px;
+    padding: 4px;
+    min-width: 6.7em;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 2px 4px;
+}
+#lblLancamentoDespesa {
+    background-color: #FF0000;
+    color: #ffffff;
+}
+#lblLancamentoReceita {
+    background-color: green;
+    color: #ffffff;
+}
+#lblLancamentoTransferencia {
+    background-color: yellow;
+}
+
+#lancamentoDetalhe {
+    font-size: 0.8em;
+    padding: 5px;
+    text-align: center;
+}
+
+#lancamentoCadastro {
+    text-align: center;
+}
+
+#adicionar .tile {
+    border: 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 6.5em;
+    height: 4.5em;
+    margin: 0.4em;
+    font-size: 1em;
+    text-align: center;
+    background-color: #bbbbbb;
+    word-wrap: break-word;
+    vertical-align: middle;
+    color: #000000;
+}
+
+#lancamentoUltimos {
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+}
+#lancamentoUltimos h2 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0px;
+}
+#lancamentoUltimos table {
+    text-align: left;
+    font-size: 0.8em;
+    width: 100%;
+}
+.ultimosLancamentosGrupos {
+    padding-left: 2em;
+}
+.ultimosLancamentosValorNegativo {
+    color: red;
+}
+#carregandoUltimos {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    z-index: -1;
+    filter: alpha(opacity=35); /* support: IE8 */
+    opacity: 0.35;
+}
+.ultimosLancamentosData {
+    background-color: rgba(223, 223, 223, 0.5);
+    font-weight: 400;
+    padding-left: 1em;
+}
+
+/** Forms **/
+
+form {
+    clear: both;
+    margin-right: 20px;
+    padding: 0;
+    width: 95%;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 1em;
+    padding: 16px 10px;
+}
+
+fieldset legend {
+    color: #e32;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+fieldset fieldset {
+    margin-top: 0;
+    padding: 10px 0 0;
+}
+fieldset fieldset legend {
+    font-size: 100%;
+    font-weight: normal;
+}
+fieldset fieldset div {
+    clear: left;
+    margin: 0 20px;
+}
+form div {
+    clear: both;
+    margin-bottom: 0px;
+    padding: .5em;
+    vertical-align: text-top;
+}
+
+form .input {
+    color: #444;
+}
+
+form .required label:after {
+    color: #e32;
+    content: '*';
+    display:inline;
+}
+
+form div.submit {
+    border: 0;
+    clear: both;
+    margin-top: 5px;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    margin-bottom:3px;
+}
+
+input, textarea {
+    clear: both;
+    font-size: 1em;
+    padding: 1%;
+    width:98%;
+}
+select {
+    clear: both;
+    font-size: 1em;
+    vertical-align: text-bottom;
+}
+select[multiple=multiple] {
+    width: 100%;
+}
+option {
+    font-size: 100%;
+    padding: 0 3px;
+}
+input[type=checkbox] {
+    clear: left;
+    float: left;
+    margin: 0px 6px 7px 2px;
+    width: auto;
+}
+div.checkbox label {
+    display: inline;
+}
+input[type=radio] {
+    width:auto;
+    margin: 6px 0;
+    padding: 0;
+    line-height: 26px;
+}
+.radio label {
+    margin: 0 0 6px 20px;
+    line-height: 26px;
+}
+input[type=submit] {
+    display: inline;
+    font-size: 1em;
+    width: auto;
+}
+form button {
+    display: inline;
+    font-size: 1em;
+    width: 100%;
+    color: #666666;
+    background-color: #ffffff;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    padding: 15px;
+    cursor: pointer;
+    margin: .5em;
+}
+form button:hover {
+    color: #ffffff;
+    background-color: #666666;
+    cursor: pointer;
+    margin: .5em;
+}
+
+form .submit input[type=submit] {
+    display: inline;
+    font-size: 1em;
+    width: 100%;
+    color: #666666;
+    background-color: #ffffff;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    padding: 15px;
+    cursor: pointer;
+    margin: .5em;
+}
+form .submit input[type=submit]:hover {
+    color: #ffffff;
+    background-color: #666666;
+    cursor: pointer;
+    margin: .5em;
+}
