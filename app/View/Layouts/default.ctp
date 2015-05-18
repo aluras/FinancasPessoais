@@ -48,7 +48,7 @@ $cakeVersion = __d('cake_dev', 'v 0.01')
             <div id="progressBar"></div>
         </div>
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, array('controller'=>'Lancamentos','action'=>'principal')); ?></h1>
+            <?php echo $this->Html->image('logo.png', array('alt' => 'Algum', 'border' => '0')); ?>
             <ul>
                 <li><?php echo $this->Html->link('Cadastrar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
                 <li><?php echo $this->Html->link('Analisar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>

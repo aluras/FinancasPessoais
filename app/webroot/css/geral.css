@@ -7,7 +7,7 @@ body{
     max-width: 1200px;
 }
 
-img, picture, video, embed {
+img, video, embed {
     max-width: 100%; /*define a largura máxima em até 100%*/
 }
 
@@ -20,15 +20,19 @@ a, a:hover, a:visited {
     width: 100%;
     border-bottom: 1px solid darkblue;
 }
+
+#header img{
+    margin-top: 5px;
+}
 #header h1{
-    margin: 0px;
+    margin: 0;
     font-size: 1em;
 }
 #header ul{
-    margin: 0em;
+    margin: 0;
     font-size: 0.9em;
     list-style: none;
-    padding: 0px;
+    padding: 0;
     display: none;
 }
 #header ul li{
@@ -58,7 +62,7 @@ a, a:hover, a:visited {
 #tipoLancamento input{
     height: 1px;
     width: 1px;
-    padding: 0px;
+    padding: 0;
     margin: -1px;
     overflow: hidden;
 }
@@ -71,7 +75,7 @@ a, a:hover, a:visited {
     opacity: 1;
 }
 #tipoLancamento label{
-    border: 0px solid #aaaaaa;
+    border: 0 solid #aaaaaa;
     font-size: 1.1em;
     border-radius: 4px;
     display: inline-block;
@@ -106,7 +110,7 @@ a, a:hover, a:visited {
 }
 
 #adicionar .tile {
-    border: 0px;
+    border: 0;
     border-radius: 4px;
     cursor: pointer;
     width: 6.5em;
@@ -128,7 +132,7 @@ a, a:hover, a:visited {
 #lancamentoUltimos h2 {
     font-size: 1em;
     font-weight: 600;
-    margin: 0px;
+    margin: 0;
 }
 #lancamentoUltimos table {
     text-align: left;
@@ -190,7 +194,7 @@ fieldset fieldset div {
 }
 form div {
     clear: both;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     padding: .5em;
     vertical-align: text-top;
 }
@@ -238,7 +242,7 @@ option {
 input[type=checkbox] {
     clear: left;
     float: left;
-    margin: 0px 6px 7px 2px;
+    margin: 0 6px 7px 2px;
     width: auto;
 }
 div.checkbox label {

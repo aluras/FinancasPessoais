@@ -135,8 +135,8 @@
                 $(btnGrupo).click(function(){selecionaGrupo(val)});
             }
         });
-        if($('#adicionar div').length == 1){
-            $('#adicionar div')[0].click();
+        if($('#adicionar button').length == 1){
+            $('#adicionar button')[0].click();
         }
 }
 
