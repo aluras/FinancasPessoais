@@ -23,6 +23,8 @@
         echo $this->Form->input('descricao', array('id' => 'descricao'));
         echo $this->Form->input('valor', array('id' => 'valor'));
         echo $this->Form->hidden('conta_usuario_id', array('id' => 'conta_usuario_id'));
+        echo $this->Form->hidden('conta_usuario_destino_id', array('id' => 'conta_usuario_destino_id'));
+        echo $this->Form->hidden('conta_usuario_origem_id', array('id' => 'conta_usuario_origem_id'));
         echo $this->Form->hidden('subgrupo_id', array('id' => 'subgrupo_id'));
         echo $this->Form->button('Gravar', array('id' => 'btnGravar'));
         ?>
@@ -115,9 +117,47 @@
                 selecionaConta(contas['dados']['ContaUsuario'][0])
             }else{
                 $.each( contas['dados']['ContaUsuario'], function( key, val ) {
-                    var btnConta = document.createElement("button");
-                    $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
-                    $(btnConta).click(function(){selecionaConta(val)});
+                    if(val['Conta']['tipo_conta_id'] != 2 || tipoLancamento != 1){
+                        var btnConta = document.createElement("button");
+                        $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
+                        $(btnConta).click(function(){selecionaConta(val)});
+                    }
+                });
+            }
+        }
+    }
+
+    function mostraContasTransferenciaDestino(subGrupo){
+        if (typeof subGrupo !== 'undefined'){
+            mostraForulario(false);
+            $('#adicionar').html('');
+            if (contas['dados']['ContaUsuario'].length == 1) {
+                selecionaConta(contas['dados']['ContaUsuario'][0])
+            }else{
+                $.each( contas['dados']['ContaUsuario'], function( key, val ) {
+                    if (subGrupo["tipo_conta_destino_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_destino_id"]){
+                        var btnConta = document.createElement("button");
+                        $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
+                        $(btnConta).click(function(){selecionaContaTransferenciaDestino(val, subGrupo)});
+                    }
+                });
+            }
+        }
+    }
+
+    function mostraContasTransferenciaOrigem(subGrupo){
+        if (typeof subGrupo !== 'undefined'){
+            mostraForulario(false);
+            $('#adicionar').html('');
+            if (contas['dados']['ContaUsuario'].length == 1) {
+                selecionaConta(contas['dados']['ContaUsuario'][0])
+            }else{
+                $.each( contas['dados']['ContaUsuario'], function( key, val ) {
+                    if (subGrupo["tipo_conta_origem_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_origem_id"]){
+                        var btnConta = document.createElement("button");
+                        $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
+                        $(btnConta).click(function(){selecionaContaTransferenciaDestino(val, subGrupo)});
+                    }
                 });
             }
         }
@@ -155,7 +195,11 @@
         tipoLancamento = tipo;
         $('#tipoLancamento > label').removeClass('tipoLancamentoSelecionado');
         $("label[for='"+$(input).attr('id')+"']").addClass('tipoLancamentoSelecionado');
-        mostraContas();
+        if (tipo == 3){
+            mostraGrupos();
+        }else{
+            mostraContas();
+        }
     }
 
     function selecionaConta(conta){
@@ -165,6 +209,15 @@
         $(b).button();
         $('#conta_usuario_id').val(conta['Conta']['id']);
         mostraGrupos();
+    }
+
+    function selecionaContaTransferenciaDestino(conta, subGrupo){
+        var b = document.createElement("button");
+        $(b).attr("id","lancamentoDetalheContaDestino").html(conta['Conta']['nome']).appendTo("#lancamentoDetalhe");
+        $(b).click(function(){mostraContasTransferenciaDestino(subGrupo)});
+        $(b).button();
+        $('#conta_usuario_destino_id').val(conta['Conta']['id']);
+        mostraContasTransferenciaOrigem(subGrupo);
     }
 
     function selecionaGrupo(grupo){
@@ -180,7 +233,11 @@
         $(b).attr("id","lancamentoDetalheSubgrupo").html(subgrupo['nome']).appendTo("#lancamentoDetalhe");
         $('#subgrupo_id').val(subgrupo['id']);
         $(b).button();
-        mostraForulario(true);
+        if (tipoLancamento == 3){
+            mostraContasTransferenciaDestino(subgrupo);
+        }else{
+            mostraForulario(true);
+        }
     }
 
     function mostraForulario(value){
