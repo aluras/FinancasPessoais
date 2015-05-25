@@ -156,7 +156,7 @@
                     if (subGrupo["tipo_conta_origem_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_origem_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
-                        $(btnConta).click(function(){selecionaContaTransferenciaDestino(val, subGrupo)});
+                        $(btnConta).click(function(){selecionaContaTransferenciaOrigem(val, subGrupo)});
                     }
                 });
             }
@@ -195,6 +195,7 @@
         tipoLancamento = tipo;
         $('#tipoLancamento > label').removeClass('tipoLancamentoSelecionado');
         $("label[for='"+$(input).attr('id')+"']").addClass('tipoLancamentoSelecionado');
+        $("#lancamentoDetalhe").html("");
         if (tipo == 3){
             mostraGrupos();
         }else{
@@ -218,6 +219,15 @@
         $(b).button();
         $('#conta_usuario_destino_id').val(conta['Conta']['id']);
         mostraContasTransferenciaOrigem(subGrupo);
+    }
+
+    function selecionaContaTransferenciaOrigem(conta, subGrupo){
+        var b = document.createElement("button");
+        $(b).attr("id","lancamentoDetalheContaOrigem").html(conta['Conta']['nome']).appendTo("#lancamentoDetalhe");
+        $(b).click(function(){mostraContasTransferenciaOrigem(subGrupo)});
+        $(b).button();
+        $('#conta_usuario_origem_id').val(conta['Conta']['id']);
+        mostraForulario(true);
     }
 
     function selecionaGrupo(grupo){

@@ -15,7 +15,15 @@ class LancamentosController extends AppController {
             $datasource = $this->Lancamento->getDataSource();
             $datasource->begin();
             $this->Lancamento->create();
-            if ($this->Lancamento->save($this->request->data)) {
+            $retorno = false;
+
+            if ($this->request->data["Lancamento"]["conta_usuario_destino_id"] > 0){
+                $retorno = $this->Lancamento->gravaTransferencia($this->request->data);
+            }else{
+                $retorno = $this->Lancamento->save($this->request->data);
+            }
+
+            if ($retorno) {
                 $datasource->commit();
                 echo __('Lançamento registrado.');
             }else{
@@ -30,11 +38,9 @@ class LancamentosController extends AppController {
                 echo __('Falha ao registrar:<br />' . $errors);
 
             }
-            //$this->redirect(array('controller'=>'usuarios','action'=>'contas'));
         }
-
-
     }
+
 
     public function ver_ajax(){
         //Consulta sem paginação
