@@ -24,19 +24,14 @@ echo $this->Paginator->options(array(
                 </td>
             </tr>
         <?php }
-        if($conta != $lancamento['Lancamento']['conta_usuario_id']) {
-            $conta = $lancamento['Lancamento']['conta_usuario_id'];?>
-            <tr class="ultimosLancamentosConta">
-                <td colspan="2" class="ultimosLancamentosConta"><strong>
-                    <?php echo $lancamento['ContaUsuario']['Conta']['nome']; ?>
-                </strong></td>
-            </tr>
-        <?php }?>
+        ?>
         <tr>
 <!--            <td>--><?php //echo CakeTime::format($lancamento['Lancamento']['data'], '%d/%m/%Y'); ?><!--</td>-->
-            <td class="ultimosLancamentosGrupos"><?php echo $lancamento['Subgrupo']['nome']; ?>
+            <td class="ultimosLancamentosGrupos"><?php echo $lancamento['Subgrupo']['nome'];
+                if ($lancamento['Subgrupo']['Grupo']['id_tipo_grupo'] == 1) {
+                ?>
                 &nbsp;-&nbsp;
-                <?php echo $lancamento['Subgrupo']['Grupo']['nome']; ?></td>
+                <?php echo $lancamento['Subgrupo']['Grupo']['nome']; }?></td>
             <td align="right" class="<?php
                 if($lancamento['Lancamento']['valor']<0){
                     echo 'ultimosLancamentosValorNegativo';

@@ -16,13 +16,14 @@ class LancamentosController extends AppController {
             $datasource->begin();
             $this->Lancamento->create();
             $retorno = false;
-
-            if ($this->request->data["Lancamento"]["conta_usuario_destino_id"] > 0){
+/*
+            if ($this->request->data["Lancamento"]["conta_usuario_debito_id"] > 0 && $this->request->data["Lancamento"]["conta_usuario_credito_id"] > 0){
                 $retorno = $this->Lancamento->gravaTransferencia($this->request->data);
             }else{
                 $retorno = $this->Lancamento->save($this->request->data);
             }
-
+*/
+            $retorno = $this->Lancamento->save($this->request->data);
             if ($retorno) {
                 $datasource->commit();
                 echo __('Lançamento registrado.');
@@ -57,13 +58,13 @@ class LancamentosController extends AppController {
             'limit' => 20,
             'order' => array(
                 'Lancamento.data' => 'desc',
-                'Lancamento.conta_usuario_id' => 'desc',
                 'Lancamento.id' => 'desc'
             ),
             'recursive' => 2
         );
         $this->set('lancamentos', $this->Paginator->paginate('Lancamento',
-            array('ContaUsuario.usuario_id' => $this->Auth->User('id')
+            array('OR' => array('ContaUsuarioDebito.usuario_id' => $this->Auth->User('id'),
+                '                ContaUsuarioCredito.usuario_id' => $this->Auth->User('id'))
             )));
    }
 } 

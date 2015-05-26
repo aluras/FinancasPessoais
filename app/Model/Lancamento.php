@@ -8,7 +8,15 @@ class Lancamento extends AppModel{
     private  $dataSource;
 
     public $belongsTo = array(
-        'Subgrupo', 'ContaUsuario'
+        'Subgrupo',
+        'ContaUsuarioCredito' => array (
+            'className' => 'ContaUsuario',
+            'foreignKey' => 'conta_usuario_credito_id'
+        ),
+        'ContaUsuarioDebito' => array (
+            'className' => 'ContaUsuario',
+            'foreignKey' => 'conta_usuario_debito_id'
+        )
     );
 
     public $validate = array(
@@ -74,7 +82,7 @@ class Lancamento extends AppModel{
         $subgrupo = $subgrupoModel->find('first',array(
             'conditions' => array('Subgrupo.id' => $this->data['Lancamento']['subgrupo_id'])
         ));
-        if($subgrupo['Grupo']['id_tipo_grupo'] == 1 || $this->data['Lancamento']['conta_usuario_id'] == $this->data['Lancamento']['conta_usuario_origem_id']){
+        if($subgrupo['Grupo']['id_tipo_grupo'] == 1){
             $this->data['Lancamento']['valor'] = abs($this->data['Lancamento']['valor']) * -1;
         }else{
             $this->data['Lancamento']['valor'] = abs($this->data['Lancamento']['valor']);
@@ -85,12 +93,24 @@ class Lancamento extends AppModel{
     public function afterSave($created, $options = array()){
         $model = new ContaUsuario();
         $model->Behaviors->load('Containable');
-        $contaUsuario = $model->find('first', array(
-            'conditions' => array('ContaUsuario.id' => $this->data['Lancamento']['conta_usuario_id']),
+
+        $contaUsuarioCredito = $model->find('first', array(
+            'conditions' => array('ContaUsuario.id' => $this->data['Lancamento']['conta_usuario_credito_id']),
             'contain' => array('Conta')
         ));
-        $contaUsuario['Conta']['saldo'] =  $contaUsuario['Conta']['saldo'] + $this->data['Lancamento']['valor'];
-        $this->ContaUsuario->Conta->save($contaUsuario['Conta']);
+        if(!empty($contaUsuarioCredito)){
+            $contaUsuarioCredito['Conta']['saldo'] =  $contaUsuarioCredito['Conta']['saldo'] + $this->data['Lancamento']['valor'];
+            $this->ContaUsuarioCredito->Conta->save($contaUsuarioCredito['Conta']);
+        }
+
+        $contaUsuarioDebito = $model->find('first', array(
+            'conditions' => array('ContaUsuario.id' => $this->data['Lancamento']['conta_usuario_debito_id']),
+            'contain' => array('Conta')
+        ));
+        if(!empty($contaUsuarioDebito)){
+            $contaUsuarioDebito['Conta']['saldo'] =  $contaUsuarioDebito['Conta']['saldo'] - abs($this->data['Lancamento']['valor']);
+            $this->ContaUsuarioDebito->Conta->save($contaUsuarioDebito['Conta']);
+        }
     }
 
 }

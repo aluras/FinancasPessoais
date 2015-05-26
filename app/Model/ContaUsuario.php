@@ -7,7 +7,14 @@ class ContaUsuario extends AppModel{
     );
 
     public $hasMany = array(
-        'Lancamento'
+        'LancamentoCredito' => array(
+            'className' => 'Lancamento',
+            'foreignKey' => 'conta_usuario_credito_id'
+        ),
+        'LancamentoDebito' => array(
+            'className' => 'Lancamento',
+            'foreignKey' => 'conta_usuario_debito_id'
+        )
     );
 
 } 

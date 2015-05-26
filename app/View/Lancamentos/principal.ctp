@@ -20,9 +20,8 @@
         echo $this->Form->input('data',array('dateFormat' => 'DMY'));
         echo $this->Form->input('descricao', array('id' => 'descricao'));
         echo $this->Form->input('valor', array('id' => 'valor'));
-        echo $this->Form->hidden('conta_usuario_id', array('id' => 'conta_usuario_id'));
-        echo $this->Form->hidden('conta_usuario_destino_id', array('id' => 'conta_usuario_destino_id'));
-        echo $this->Form->hidden('conta_usuario_origem_id', array('id' => 'conta_usuario_origem_id'));
+        echo $this->Form->hidden('conta_usuario_credito_id', array('id' => 'conta_usuario_credito_id'));
+        echo $this->Form->hidden('conta_usuario_debito_id', array('id' => 'conta_usuario_debito_id'));
         echo $this->Form->hidden('subgrupo_id', array('id' => 'subgrupo_id'));
         echo $this->Form->button('Gravar', array('id' => 'btnGravar'));
         ?>
@@ -206,7 +205,11 @@
         $(b).attr("id","lancamentoDetalheConta").html(conta['Conta']['nome']).appendTo("#lancamentoDetalhe");
         $(b).click(function(){mostraContas()});
         $(b).button();
-        $('#conta_usuario_id').val(conta['Conta']['id']);
+        if(tipoLancamento == 1){
+            $('#conta_usuario_debito_id').val(conta['Conta']['id']);
+        }else{
+            $('#conta_usuario_credito_id').val(conta['Conta']['id']);
+        }
         mostraGrupos();
     }
 
@@ -215,7 +218,7 @@
         $(b).attr("id","lancamentoDetalheContaDestino").html(conta['Conta']['nome']).appendTo("#lancamentoDetalhe");
         $(b).click(function(){mostraContasTransferenciaDestino(subGrupo)});
         $(b).button();
-        $('#conta_usuario_destino_id').val(conta['Conta']['id']);
+        $('#conta_usuario_credito_id').val(conta['Conta']['id']);
         mostraContasTransferenciaOrigem(subGrupo);
     }
 
@@ -224,7 +227,7 @@
         $(b).attr("id","lancamentoDetalheContaOrigem").html(conta['Conta']['nome']).appendTo("#lancamentoDetalhe");
         $(b).click(function(){mostraContasTransferenciaOrigem(subGrupo)});
         $(b).button();
-        $('#conta_usuario_origem_id').val(conta['Conta']['id']);
+        $('#conta_usuario_debito_id').val(conta['Conta']['id']);
         mostraForulario(true);
     }
 
