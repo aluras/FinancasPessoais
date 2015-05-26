@@ -7,21 +7,30 @@ echo $this->Paginator->options(array(
 ));
 ?>
 <table>
-    <tr>
+   <!-- <tr>
         <th>Grupo</th>
         <th align="right">Valor</th>
-    </tr>
+    </tr>-->
     <?php
     $data = null;
+    $conta = null;
     foreach ($lancamentos as $lancamento):
         if($data != $lancamento['Lancamento']['data']) {
-            $data = $lancamento['Lancamento']['data']; ?>
+            $data = $lancamento['Lancamento']['data'];
+            $conta = null;?>
             <tr class="ultimosLancamentosData">
                 <td colspan="2" class="ultimosLancamentosData">
                     <?php echo CakeTime::format($lancamento['Lancamento']['data'], '%d/%m/%Y'); ?>
                 </td>
             </tr>
-
+        <?php }
+        if($conta != $lancamento['Lancamento']['conta_usuario_id']) {
+            $conta = $lancamento['Lancamento']['conta_usuario_id'];?>
+            <tr class="ultimosLancamentosConta">
+                <td colspan="2" class="ultimosLancamentosConta"><strong>
+                    <?php echo $lancamento['ContaUsuario']['Conta']['nome']; ?>
+                </strong></td>
+            </tr>
         <?php }?>
         <tr>
 <!--            <td>--><?php //echo CakeTime::format($lancamento['Lancamento']['data'], '%d/%m/%Y'); ?><!--</td>-->

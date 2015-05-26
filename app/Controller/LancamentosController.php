@@ -57,6 +57,7 @@ class LancamentosController extends AppController {
             'limit' => 20,
             'order' => array(
                 'Lancamento.data' => 'desc',
+                'Lancamento.conta_usuario_id' => 'desc',
                 'Lancamento.id' => 'desc'
             ),
             'recursive' => 2

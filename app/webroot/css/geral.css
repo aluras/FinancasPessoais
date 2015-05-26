@@ -140,7 +140,10 @@ a, a:hover, a:visited {
     width: 100%;
 }
 .ultimosLancamentosGrupos {
-    padding-left: 2em;
+    padding-left: 3em;
+}
+.ultimosLancamentosValor {
+    color: green;
 }
 .ultimosLancamentosValorNegativo {
     color: red;
@@ -157,6 +160,10 @@ a, a:hover, a:visited {
     background-color: rgba(223, 223, 223, 0.5);
     font-weight: 400;
     padding-left: 1em;
+}
+.ultimosLancamentosConta {
+    font-weight: 400;
+    padding-left: 2em;
 }
 
 /** Forms **/

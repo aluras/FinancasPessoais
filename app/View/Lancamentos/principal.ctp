@@ -8,8 +8,6 @@
         <button id="lancamentoTransferencia" onclick="selecionaTipoLancamento(this,3)">Transferência</button>-->
     </div>
     <div id="lancamentoDetalhe">
-        <input type="hidden" id="hdnConta"/>
-        <input type="hidden" id="hdnSubgrupo"/>
     </div>
 </div>
 <div id="lancamentoCadastro">
@@ -265,7 +263,12 @@
         $("#lancamentoForm")[0].reset();
         mostraMensagem('Sucesso:', data)
         carregaUltimos();
-        mostraContas();
+        $("#lancamentoDetalhe").html("");
+        if (tipoLancamento == 3){
+            mostraGrupos();
+        }else{
+            mostraContas();
+        }
     }
 
     function adicionarPrepara(){

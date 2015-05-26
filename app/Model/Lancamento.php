@@ -64,6 +64,7 @@ class Lancamento extends AppModel{
     public function gravaTransferencia($data = null, $validate = true, $fieldList = array()){
         $data['Lancamento']['conta_usuario_id'] = $data['Lancamento']['conta_usuario_destino_id'];
         parent::save($data);
+        parent::create($data);
         $data['Lancamento']['conta_usuario_id'] = $data['Lancamento']['conta_usuario_origem_id'];
         return parent::save($data);
     }
