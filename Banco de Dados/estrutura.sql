@@ -1,3 +1,7 @@
+
+CREATE DATABASE  IF NOT EXISTS `financas_pessoais` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `financas_pessoais`;
+
 -- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: financas_pessoais
