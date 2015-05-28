@@ -36,10 +36,15 @@
  */
 	CakePlugin::routes();
 
+    Router::resourceMap(array(
+        array('action' => 'contas_json', 'method' => 'GET', 'id' => false)
+    ));
+
+    Router::parseExtensions('json');
+
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
  * the built-in default routes.
  */
 	require CAKE . 'Config' . DS . 'routes.php';
 
-    Router::parseExtensions('json');

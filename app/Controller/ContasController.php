@@ -16,9 +16,13 @@ class ContasController extends AppController {
                 'TipoConta'
             )
         ));
-        $this->set('dados', $dados);
-        $this->set('_serialize', array('dados'));
-    }
 
+        if(isset($this->request->params['ext'])){
+            $this->autoRender = false;
+            $this->response->body(json_encode($dados));
+        }else{
+            $this->set('dados', $dados);
+        }
+    }
 
 } 
