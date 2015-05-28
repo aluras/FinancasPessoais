@@ -10,19 +10,14 @@ class UsuariosController extends AppController {
         $this->Auth->allow('logout', 'login', 'add');
     }
 
-    public function index() {
-        $this->Usuario->recursive = 0;
-        $this->set('usuarios', $this->paginate());
-    }
-
-    public function contas(){
+    public function contas_json(){
         $this->Usuario->Behaviors->load('Containable');
         $dados = $this->Usuario->find('first', array(
             'conditions' => array('Usuario.id' => $this->Auth->User('id')),
             'contain' => array('ContaUsuario.Conta')
         ));
-        $this->set('dados', $dados);
-        $this->set('_serialize', array('dados'));
+        $this->autoRender = false;
+        $this->response->body(json_encode($dados));
     }
 
     public function view($id = null) {

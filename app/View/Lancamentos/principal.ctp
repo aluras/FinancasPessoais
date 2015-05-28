@@ -49,9 +49,11 @@
 
                 success: function(data){
                     adicionarRetorno(data);
+                    wait = false;
                 },
                 error: function(data) {
                     mostraMensagem('Erro:',data.responseText);
+                    wait = false;
                 }
             });
             event.preventDefault();
@@ -66,7 +68,7 @@
     carregaUltimos();
 
     $.getJSON(
-        '<?php echo Router::url(array('controller'=>'grupos','action'=>'listar','ext' => 'json'));?>',
+        '<?php echo Router::url(array('controller'=>'grupos','action'=>'listar_json','ext' => 'json'));?>',
         function(data){
             grupos = data;
             mostraContas();
@@ -78,7 +80,7 @@
         });
 
     $.getJSON(
-        '<?php echo Router::url(array('controller'=>'usuarios','action'=>'contas','ext' => 'json'));?>',
+        '<?php echo Router::url(array('controller'=>'usuarios','action'=>'contas_json','ext' => 'json'));?>',
         function(data){
             contas = data;
             mostraContas();
@@ -109,11 +111,12 @@
             $("#lancamentoDetalheGrupo").remove();
             $("#lancamentoDetalheSubgrupo").remove();
             mostraForulario(false);
+            $("#lancamentoTop").show();
             $('#adicionar').html('');
-            if (contas['dados']['ContaUsuario'].length == 1) {
-                selecionaConta(contas['dados']['ContaUsuario'][0])
+            if (contas['ContaUsuario'].length == 1) {
+                selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['dados']['ContaUsuario'], function( key, val ) {
+                $.each( contas['ContaUsuario'], function( key, val ) {
                     if(val['Conta']['tipo_conta_id'] != 2 || tipoLancamento != 1){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
@@ -128,10 +131,10 @@
         if (typeof subGrupo !== 'undefined'){
             mostraForulario(false);
             $('#adicionar').html('');
-            if (contas['dados']['ContaUsuario'].length == 1) {
-                selecionaConta(contas['dados']['ContaUsuario'][0])
+            if (contas['ContaUsuario'].length == 1) {
+                selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['dados']['ContaUsuario'], function( key, val ) {
+                $.each( contas['ContaUsuario'], function( key, val ) {
                     if (subGrupo["tipo_conta_destino_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_destino_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
@@ -146,10 +149,10 @@
         if (typeof subGrupo !== 'undefined'){
             mostraForulario(false);
             $('#adicionar').html('');
-            if (contas['dados']['ContaUsuario'].length == 1) {
-                selecionaConta(contas['dados']['ContaUsuario'][0])
+            if (contas['ContaUsuario'].length == 1) {
+                selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['dados']['ContaUsuario'], function( key, val ) {
+                $.each( contas['ContaUsuario'], function( key, val ) {
                     if (subGrupo["tipo_conta_origem_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_origem_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
@@ -165,7 +168,7 @@
         $("#lancamentoDetalheSubgrupo").remove();
         mostraForulario(false);
         $('#adicionar').html('');
-        $.each( grupos['grupos'], function( key, val ) {
+        $.each( grupos, function( key, val ) {
             if (val['Grupo']['id_tipo_grupo'] == tipoLancamento){
                 var btnGrupo = document.createElement("button");
                 $(btnGrupo).addClass("tile").html(val['Grupo']['nome']).appendTo("#adicionar");
@@ -264,7 +267,6 @@
 
     function adicionarRetorno(data){
         $("#lancamentoForm")[0].reset();
-        mostraMensagem('Sucesso:', data)
         carregaUltimos();
         $("#lancamentoDetalhe").html("");
         if (tipoLancamento == 3){
@@ -298,7 +300,6 @@
                 }
             }
         });
-        wait = false;
     }
 
 </script>

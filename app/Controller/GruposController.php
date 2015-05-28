@@ -4,18 +4,12 @@ App::uses('AppController','Controller');
 class GruposController extends AppController{
     public $components = array('RequestHandler');
 
-    public function listar()
+    public function listar_json()
     {
         $dados =$this->Grupo->find('all',array());
-        $this->set('grupos',$dados);
-        $this->set('_serialize', array('grupos'));
+        $this->autoRender = false;
+        $this->response->body(json_encode($dados));
+
     }
 
-    public function sub_grupos($id){
-        $this->set('grupo',$this->Grupo->find('first',array(
-            'conditions' => array(
-                'id' => $id
-            )
-        )));
-    }
 }

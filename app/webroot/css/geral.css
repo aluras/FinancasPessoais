@@ -51,6 +51,7 @@ a, a:hover, a:visited {
 #lancamentoTop{
     width: 100%;
     border-bottom: 1px solid #bbbbbb;
+    display: none;
 }
 
 #tipoLancamento {
