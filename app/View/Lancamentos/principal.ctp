@@ -131,10 +131,10 @@
         if (typeof subGrupo !== 'undefined'){
             mostraForulario(false);
             $('#adicionar').html('');
-            if (contas['ContaUsuario'].length == 1) {
+            if (contas.length == 1) {
                 selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['ContaUsuario'], function( key, val ) {
+                $.each( contas, function( key, val ) {
                     if (subGrupo["tipo_conta_destino_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_destino_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
@@ -149,10 +149,10 @@
         if (typeof subGrupo !== 'undefined'){
             mostraForulario(false);
             $('#adicionar').html('');
-            if (contas['ContaUsuario'].length == 1) {
+            if (contas.length == 1) {
                 selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['ContaUsuario'], function( key, val ) {
+                $.each( contas, function( key, val ) {
                     if (subGrupo["tipo_conta_origem_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_origem_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");

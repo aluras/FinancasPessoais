@@ -52,14 +52,14 @@ class AppController extends Controller {
             ),
             'authError' => 'Acesso negado!',
             'authenticate' => array(
-                'Form' => [
+                'Form' => array(
                     'userModel' => 'Usuario',
                     'fields' => array(
                         'username' => 'email',
                         'password' => 'password'
                     ),
                     'passwordHasher' => 'Blowfish'
-                ]
+                )
             )
         )
     );
@@ -67,5 +67,16 @@ class AppController extends Controller {
     public function beforeFilter() {
         CakeNumber::addFormat('BRL', array('before' => 'R$ ', 'thousands' => '.', 'decimals' => ','));
         CakeNumber::defaultCurrency('BRL');
+        if(isset($this->request->params['ext'])){
+            $this->Auth->authenticate = array(
+                'Basic' => array(
+                    'userModel' => 'Usuario',
+                    'fields' => array(
+                        'username' => 'email',
+                        'password' => 'password'
+                    ),
+                    'passwordHasher' => 'Blowfish'
+            ));
+        }
     }
 }
