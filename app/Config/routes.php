@@ -36,10 +36,6 @@
  */
 	CakePlugin::routes();
 
-    Router::resourceMap(array(
-        array('action' => 'contas_json', 'method' => 'GET', 'id' => false)
-    ));
-
     Router::parseExtensions('json');
 
 /**
