@@ -1,7 +1,5 @@
-
 CREATE DATABASE  IF NOT EXISTS `financas_pessoais` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `financas_pessoais`;
-
 -- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: financas_pessoais
@@ -103,7 +101,7 @@ CREATE TABLE `lancamentos` (
   KEY `fk_lancamentos_subgrupo1_idx` (`subgrupo_id`),
   CONSTRAINT `fk_lancamentos_contas_usuarios` FOREIGN KEY (`conta_usuario_credito_id`) REFERENCES `conta_usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_lancamentos_subgrupo` FOREIGN KEY (`subgrupo_id`) REFERENCES `subgrupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,11 +191,12 @@ CREATE TABLE `usuarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(50) CHARACTER SET latin1 NOT NULL,
   `password` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `digest_pass` varchar(255) DEFAULT NULL,
   `perfil` varchar(20) CHARACTER SET latin1 NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -209,4 +208,4 @@ CREATE TABLE `usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-27  0:25:15
+-- Dump completed on 2015-06-03 14:30:07

@@ -76,6 +76,8 @@ class UsuariosController extends AppController {
                 $this->Session->setFlash(__('Email ou senha inválido. Tente novamente.'));
 
             }
+        }else{
+            return $this->Auth->login();
         }
     }
 

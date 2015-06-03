@@ -69,7 +69,7 @@ class AppController extends Controller {
         CakeNumber::defaultCurrency('BRL');
         if(isset($this->request->params['ext'])){
             $this->Auth->authenticate = array(
-                'Basic' => array(
+                'Digest' => array(
                     'userModel' => 'Usuario',
                     'fields' => array(
                         'username' => 'email',
