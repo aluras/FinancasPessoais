@@ -23,6 +23,5 @@ class ContasControllerTest extends ControllerTestCase {
                   )
             )
         );
-        debug(json_decode($result,true));
     }
 } 
