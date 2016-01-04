@@ -49,7 +49,7 @@ $cakeVersion = __d('cake_dev', 'v 0.01')
         </div>
 		<div id="header">
             <?php echo $this->Html->image('logo.png', array('alt' => 'Algum', 'border' => '0')); ?>
-            <ul>
+            <ul style="display: none">
                 <li><?php echo $this->Html->link('Cadastrar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
                 <li><?php echo $this->Html->link('Analisar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
                 <li><?php echo $this->Html->link('Configurar', array('controller'=>'Usuarios','action'=>'configurar')); ?></li>

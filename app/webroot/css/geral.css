@@ -33,7 +33,7 @@ a, a:hover, a:visited {
     font-size: 0.9em;
     list-style: none;
     padding: 0;
-    display: none;
+   /* display: none; */
 }
 #header ul li{
     display: inline;
@@ -46,6 +46,10 @@ a, a:hover, a:visited {
 }
 #footer img{
     float: right;
+}
+
+.login_terceiros{
+    margin: 1em;
 }
 
 #lancamentoTop{

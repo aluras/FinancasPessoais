@@ -10,7 +10,8 @@ class ContasController extends AppController {
             'contain' => array(
                 'ContaUsuario' => array(
                     'conditions' => array(
-                        'usuario_id' => $this->Auth->User('id')
+                        //'usuario_id' => $this->Auth->User('id')
+                        'usuario_id' => 1
                     )
                 ),
                 'TipoConta'

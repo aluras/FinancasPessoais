@@ -7,7 +7,7 @@ class UsuariosController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('logout', 'login', 'add', 'google_login','login_callback');
+        $this->Auth->allow('logout', 'login', 'add', 'login_terceiros','login_callback');
     }
 
     public function view($id = null) {
@@ -69,7 +69,7 @@ class UsuariosController extends AppController {
     }
 
     public function login() {
-            if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
             if($this->Auth->login()){
                 return $this->redirect($this->Auth->redirectUrl());
             }else{
@@ -81,7 +81,28 @@ class UsuariosController extends AppController {
         }
     }
 
-    public function google_login(){
+    public function login_terceiros(){
+        require_once 'Google/autoload.php';
+
+        $google_client_id = '48636432617-l6duqf4jpe3irph355fas92mqfcimfmr.apps.googleusercontent.com';
+        $google_client_secret = 'Vax1iehlEXy3bI6PP7hgoT1N';
+        $google_redirect_url = 'http://localhost:81/FinancasPessoais/usuarios/login_callback';
+
+        $gClient = new Google_Client();
+        $gClient->setApplicationName('Login to localhost');
+        $gClient->setClientId($google_client_id);
+        $gClient->setClientSecret($google_client_secret);
+        $gClient->setRedirectUri($google_redirect_url);
+        $gClient->addScope('email');
+
+        //get google login url
+        $authUrl = $gClient->createAuthUrl();
+
+        $this->set('authUrl', $authUrl);
+
+    }
+
+    public function login_callback(){
         require_once 'Google/autoload.php';
 
         $google_client_id = '48636432617-l6duqf4jpe3irph355fas92mqfcimfmr.apps.googleusercontent.com';
@@ -107,31 +128,6 @@ class UsuariosController extends AppController {
             header('Location: ' . filter_var($google_redirect_url, FILTER_SANITIZE_URL));
         }
 
-        //get google login url
-        $authUrl = $gClient->createAuthUrl();
-
-        if(isset($authUrl)) //user is not logged in, show login button
-        {
-            $this->set('authUrl', $authUrl);
-        }
-
-    }
-
-    public function login_callback(){
-        require_once 'Google/autoload.php';
-
-        $google_client_id = '48636432617-l6duqf4jpe3irph355fas92mqfcimfmr.apps.googleusercontent.com';
-        $google_client_secret = 'Vax1iehlEXy3bI6PP7hgoT1N';
-        $google_redirect_url = 'http://localhost:81/FinancasPessoais/usuarios/login_callback';
-
-        $gClient = new Google_Client();
-        $gClient->setApplicationName('Login to localhost');
-        $gClient->setClientId($google_client_id);
-        $gClient->setClientSecret($google_client_secret);
-        $gClient->setRedirectUri($google_redirect_url);
-        $gClient->addScope('email');
-
-        $google_oauthV2 = new Google_Service_Oauth2($gClient);
         //Redirect user to google authentication page for code, if code is empty.
         //Code is required to aquire Access Token from google
         //Once we have access token, assign token to session variable
@@ -153,6 +149,7 @@ class UsuariosController extends AppController {
         {
             //Get user details if user is logged in
             $user = $google_oauthV2->userinfo->get();
+            debug($user);
             $user_id = $user['id'];
             $user_name = filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
@@ -171,7 +168,7 @@ class UsuariosController extends AppController {
             $this->set('msg', $msg1);
 
         }
-
+        //return $this->Auth->login();
     }
 
     public function logout() {
