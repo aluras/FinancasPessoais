@@ -149,14 +149,39 @@ class UsuariosController extends AppController {
         {
             //Get user details if user is logged in
             $user = $google_oauthV2->userinfo->get();
-            debug($user);
-            $user_id = $user['id'];
             $user_name = filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
-            $profile_url = filter_var($user['link'], FILTER_VALIDATE_URL);
             $profile_image_url = filter_var($user['picture'], FILTER_VALIDATE_URL);
-            $personMarkup = "$email<div><img src='$profile_image_url?sz=50'></div>";
-            $this->Session->write('token', $gClient->getAccessToken());
+            $token = $gClient->getAccessToken();
+            $this->Session->write('token', $token);
+            $this->Session->write('usuario', $user_name);
+            $this->Session->write('usuario_img', $profile_image_url);
+
+            $usuario = $this->Usuario->find('first',
+                array('conditions' => array('Usuario.email'=> $email)));
+
+            if (count($usuario)>0){
+                $usuario['Usuario']['token_google'] = json_decode($token,true)['access_token'];
+                if ($this->Usuario->save($usuario)) {
+                    //$this->Session->setFlash(__('Alteração efetuada.'));
+                    return $this->redirect(array(
+                        'controller' => 'lancamentos',
+                        'action' => 'principal'));
+                }
+            }else{
+                $this->Usuario->create();
+                $this->Usuario->set('email',$email);
+                $this->Usuario->set('token_google',json_decode($token,true)['access_token']);
+                if ($this->Usuario->save()) {
+                    $this->Session->setFlash(__('Usuário cadastrado.'));
+                    return $this->redirect(array(
+                        'controller' => 'lancamentos',
+                        'action' => 'principal'));
+                }
+                $this->Session->setFlash(
+                    __('Ocorreu um erro. Tente novamente.')
+                );
+            }
 
             $msg1 = 'Hi '.$user_name.', Thanks for Registering!';
             $msg1 .= '<br />';

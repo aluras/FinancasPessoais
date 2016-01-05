@@ -49,6 +49,8 @@ $cakeVersion = __d('cake_dev', 'v 0.01')
         </div>
 		<div id="header">
             <?php echo $this->Html->image('logo.png', array('alt' => 'Algum', 'border' => '0')); ?>
+            <?php echo $this->Session->read('usuario'); ?>
+            <?php echo $this->Html->image($this->Session->read('usuario_img'), array('alt' => 'Você', 'border' => '0')); ?>
             <ul style="display: none">
                 <li><?php echo $this->Html->link('Cadastrar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
                 <li><?php echo $this->Html->link('Analisar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
