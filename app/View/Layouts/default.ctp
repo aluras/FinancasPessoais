@@ -41,7 +41,16 @@ $cakeVersion = __d('cake_dev', 'v 0.01')
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="clearfix">
+<body>
+    <div id="algum_menu">
+        <ul>
+            <li><?php echo $this->Html->link('Novo Lançamento', array('controller'=>'Lancamentos','action'=>'novo')); ?></li>
+            <li><?php echo $this->Html->link('Extrato', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
+            <li><?php echo $this->Html->link('Contas', array('controller'=>'Usuarios','action'=>'configurar')); ?></li>
+            <li><?php echo $this->Html->link('Grupos', array('controller'=>'Usuarios','action'=>'configurar')); ?></li>
+            <li><?php echo $this->Html->link('Sair', array('controller'=>'Usuarios','action'=>'logout'))    ; ?></li>
+        </ul>
+    </div>
 	<div id="container">
         <div id="dialog">
             <div id="mensagem"></div>
@@ -49,14 +58,7 @@ $cakeVersion = __d('cake_dev', 'v 0.01')
         </div>
 		<div id="header">
             <?php echo $this->Html->image('logo.png', array('alt' => 'Algum', 'border' => '0')); ?>
-            <?php echo $this->Session->read('usuario'); ?>
-            <?php echo $this->Html->image($this->Session->read('usuario_img'), array('alt' => 'Você', 'border' => '0')); ?>
-            <ul style="display: none">
-                <li><?php echo $this->Html->link('Cadastrar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
-                <li><?php echo $this->Html->link('Analisar', array('controller'=>'Lancamentos','action'=>'principal')); ?></li>
-                <li><?php echo $this->Html->link('Configurar', array('controller'=>'Usuarios','action'=>'configurar')); ?></li>
-                <li><?php echo $this->Html->link('Sair', array('controller'=>'Usuarios','action'=>'logout'))    ; ?></li>
-            </ul>
+            <div id="div_email"><?php echo $this->Session->read('email'); ?></div>
 		</div>
 		<div id="content">
 

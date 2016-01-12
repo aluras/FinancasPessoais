@@ -82,6 +82,8 @@ class UsuariosController extends AppController {
     }
 
     public function login_terceiros(){
+        $this->layout = '';
+
         require_once 'Google/autoload.php';
 
         $google_client_id = '48636432617-l6duqf4jpe3irph355fas92mqfcimfmr.apps.googleusercontent.com';
@@ -155,6 +157,7 @@ class UsuariosController extends AppController {
             $token = $gClient->getAccessToken();
             $this->Session->write('token', $token);
             $this->Session->write('usuario', $user_name);
+            $this->Session->write('email', $email);
             $this->Session->write('usuario_img', $profile_image_url);
 
             $usuario = $this->Usuario->find('first',

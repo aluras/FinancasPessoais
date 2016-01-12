@@ -75,7 +75,7 @@ class AppController extends Controller {
     public function beforeFilter() {
         CakeNumber::addFormat('BRL', array('before' => 'R$ ', 'thousands' => '.', 'decimals' => ','));
         CakeNumber::defaultCurrency('BRL');
-        if(isset($this->request->params['ext'])){
+/*        if(isset($this->request->params['ext'])){
             $this->Auth->authenticate = array(
                 'Basic' => array(
                     'userModel' => 'Usuario',
@@ -85,6 +85,6 @@ class AppController extends Controller {
                     ),
                     'passwordHasher' => 'Blowfish'
             ));
-        }
+        }*/
     }
 }
