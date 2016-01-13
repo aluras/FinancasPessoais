@@ -1,6 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+App::uses('DigestAuthenticate', 'Controller/Component/Auth');
 
 
 class Usuario extends AppModel {
@@ -36,6 +37,9 @@ class Usuario extends AppModel {
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
+            $digestPass = DigestAuthenticate::password($this->data[$this->alias]['email'], env('SERVER_NAME'), $this->data[$this->alias]['password']);
+            $this->data[$this->alias]['digest_pass'] = $digestPass;
+
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
                 $this->data[$this->alias]['password']

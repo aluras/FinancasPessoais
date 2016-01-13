@@ -21,6 +21,7 @@
 
 App::uses('Controller', 'Controller');
 App::uses('CakeNumber', 'Utility');
+App::uses('OAuth_terceiros', 'Controller/Component/Auth');
 App::import('Core', 'l18n');
 /**
  * Application Controller
@@ -39,7 +40,7 @@ class AppController extends Controller {
         'Auth' => array(
             'loginAction' => array(
                 'controller' => 'usuarios',
-                'action' => 'login'
+                'action' => 'login_terceiros'
             ),
             'loginRedirect' => array(
                 'controller' => 'lancamentos',
@@ -52,14 +53,21 @@ class AppController extends Controller {
             ),
             'authError' => 'Acesso negado!',
             'authenticate' => array(
-                'Form' => [
+                'OAuth_terceiros'=> array(
+                    'userModel' => 'Usuario',
+                    'fields' => array(
+                        'username' => 'email',
+                        'password' => 'password'
+                    )
+                ),
+                'Form' => array(
                     'userModel' => 'Usuario',
                     'fields' => array(
                         'username' => 'email',
                         'password' => 'password'
                     ),
                     'passwordHasher' => 'Blowfish'
-                ]
+                )
             )
         )
     );
@@ -67,5 +75,16 @@ class AppController extends Controller {
     public function beforeFilter() {
         CakeNumber::addFormat('BRL', array('before' => 'R$ ', 'thousands' => '.', 'decimals' => ','));
         CakeNumber::defaultCurrency('BRL');
+/*        if(isset($this->request->params['ext'])){
+            $this->Auth->authenticate = array(
+                'Basic' => array(
+                    'userModel' => 'Usuario',
+                    'fields' => array(
+                        'username' => 'email',
+                        'password' => 'password'
+                    ),
+                    'passwordHasher' => 'Blowfish'
+            ));
+        }*/
     }
 }

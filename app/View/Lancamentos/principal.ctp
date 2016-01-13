@@ -80,7 +80,7 @@
         });
 
     $.getJSON(
-        '<?php echo Router::url(array('controller'=>'usuarios','action'=>'contas_json','ext' => 'json'));?>',
+        '<?php echo Router::url(array('controller'=>'contas','action'=>'listar','ext' => 'json'));?>',
         function(data){
             contas = data;
             mostraContas();
@@ -113,10 +113,10 @@
             mostraForulario(false);
             $("#lancamentoTop").show();
             $('#adicionar').html('');
-            if (contas['ContaUsuario'].length == 1) {
-                selecionaConta(contas['ContaUsuario'][0])
+            if (contas.length == 1) {
+                selecionaConta(contas[0])
             }else{
-                $.each( contas['ContaUsuario'], function( key, val ) {
+                $.each( contas, function( key, val ) {
                     if(val['Conta']['tipo_conta_id'] != 2 || tipoLancamento != 1){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
@@ -131,10 +131,10 @@
         if (typeof subGrupo !== 'undefined'){
             mostraForulario(false);
             $('#adicionar').html('');
-            if (contas['ContaUsuario'].length == 1) {
+            if (contas.length == 1) {
                 selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['ContaUsuario'], function( key, val ) {
+                $.each( contas, function( key, val ) {
                     if (subGrupo["tipo_conta_destino_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_destino_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");
@@ -149,10 +149,10 @@
         if (typeof subGrupo !== 'undefined'){
             mostraForulario(false);
             $('#adicionar').html('');
-            if (contas['ContaUsuario'].length == 1) {
+            if (contas.length == 1) {
                 selecionaConta(contas['ContaUsuario'][0])
             }else{
-                $.each( contas['ContaUsuario'], function( key, val ) {
+                $.each( contas, function( key, val ) {
                     if (subGrupo["tipo_conta_origem_id"] == null || val['Conta']["tipo_conta_id"] == subGrupo["tipo_conta_origem_id"]){
                         var btnConta = document.createElement("button");
                         $(btnConta).addClass("tile").html(val['Conta']['nome']).appendTo("#adicionar");

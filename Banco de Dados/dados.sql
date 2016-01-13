@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `financas_pessoais` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `financas_pessoais`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: financas_pessoais
@@ -31,7 +33,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `contas` WRITE;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
-INSERT INTO `contas` VALUES (1,'Geral',0.00,-150.00,1,'',NULL,'2015-04-23 16:12:40'),(2,'Banco do Brasil',0.00,16156.33,1,'',NULL,'2015-04-23 03:42:14'),(3,'Cartão Caixa',0.00,7348.00,3,'',NULL,'2015-05-25 04:28:53'),(4,'BB RF LP Parc',50000.00,51068.00,2,'',NULL,'2015-05-18 03:48:13'),(5,'Carteira André',70.00,993.00,4,'',NULL,'2015-05-26 03:05:44'),(6,'VR André',360.00,-774.00,5,'',NULL,'2015-05-26 03:25:25');
+INSERT INTO `contas` VALUES (1,'Geral',0.00,-150.00,1,'',NULL,'2015-04-23 16:12:40'),(2,'Banco do Brasil',0.00,12042.30,1,'',NULL,'2015-04-23 03:42:14'),(3,'Cartão Caixa',0.00,7400.00,3,'',NULL,'2015-05-25 04:28:53'),(4,'BB RF LP Parc',50000.00,52068.00,2,'',NULL,'2015-05-18 03:48:13'),(5,'Carteira André',70.00,1029.00,4,'',NULL,'2015-05-26 03:05:44'),(6,'VR André',360.00,-791.00,5,'',NULL,'2015-05-26 03:25:25');
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +93,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'andrelrs80@gmail.com','$2a$10$7tIPP96Lo6L0cCOmq6fd5u.055e3bg9VkJHCocrANIx5.l20yDYhy','admin','2015-02-01 02:36:02','2015-02-01 02:36:02'),(2,'drimrfisio@gmail.com','$2a$10$DczXtnHtOylEQd.A.UV9..rqj1i9b0XZUXJMLxEpLLI7e8vjVTY6u','admin','2015-02-01 02:38:44','2015-02-01 02:38:44');
+INSERT INTO `usuarios` VALUES (1,'andrelrs80@gmail.com','$2a$10$7tIPP96Lo6L0cCOmq6fd5u.055e3bg9VkJHCocrANIx5.l20yDYhy',NULL,'admin','2015-02-01 02:36:02','2015-02-01 02:36:02'),(3,'drimrfisio@gmail.com','$2a$10$uFmFwnHx3GkZqAY2OtFrC.4fTCNsce08eGyIlWcl/yir03splRZrq','ff8bcb7c14bf14fb566d95c4176dfda4','admin','2015-06-01 12:24:06','2015-06-01 12:24:06');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +106,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-26  0:02:08
+-- Dump completed on 2015-06-03 14:30:43

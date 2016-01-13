@@ -9,6 +9,9 @@ class LancamentosController extends AppController {
     public function principal(){
     }
 
+    public function novo(){
+    }
+
     public function adicionar(){
         if ($this->request->is('ajax')) {
             $this->layout = 'ajax';

@@ -10,15 +10,20 @@ class ContasController extends AppController {
             'contain' => array(
                 'ContaUsuario' => array(
                     'conditions' => array(
-                        'usuario_id' => $this->Auth->User('id')
+                        //'usuario_id' => $this->Auth->User('id')
+                        'usuario_id' => 1
                     )
                 ),
                 'TipoConta'
             )
         ));
-        $this->set('dados', $dados);
-        $this->set('_serialize', array('dados'));
-    }
 
+        if(isset($this->request->params['ext'])){
+            $this->autoRender = false;
+            $this->response->body(json_encode($dados));
+        }else{
+            $this->set('dados', $dados);
+        }
+    }
 
 } 
